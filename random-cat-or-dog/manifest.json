@@ -4,6 +4,6 @@
   "chrome_url_overrides": {
      "newtab": "public/index.html"
   },
-  "name": "Random Dog in New Tab",
+  "name": "Random Cat or Dog in New Tab",
   "version": "0.1"
 }
