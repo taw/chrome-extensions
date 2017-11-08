@@ -1,0 +1,12 @@
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: 100vh;
+  text-align: center;
+}
+h3 {
+  margin-top: 5vh;
+  font-size: 200%;
+  font-style: italic;
+}
