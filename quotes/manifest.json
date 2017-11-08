@@ -4,6 +4,6 @@
   "chrome_url_overrides": {
      "newtab": "public/index.html"
   },
-  "name": "Joke in New Tab",
+  "name": "Quote in New Tab",
   "version": "0.1"
 }

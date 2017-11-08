@@ -1,0 +1,21 @@
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: 100vh;
+}
+.quote {
+  max-width: 50vh;
+  font-size: 150%;
+  font-family: 'Shadows Into Light', cursive;
+}
+.text {
+  text-align: left;
+  margin-bottom: 1em;
+}
+.author {
+  text-align: right;
+}
+.author::before {
+  content: "\2014";
+}
