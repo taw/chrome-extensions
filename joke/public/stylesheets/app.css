@@ -1,0 +1,22 @@
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: 100vh;
+  text-align: center;
+}
+div {
+  white-space: pre;
+  font-size: 120%;
+  font-family: 'Shadows Into Light', cursive;
+}
+.setup {
+  margin-bottom: 1em;
+}
+.punchline {
+  opacity: 0;
+  transition-duration: 1s;
+}
+.punchline.visible {
+  opacity: 1;
+}
