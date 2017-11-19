@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "author": "Tomasz Wegrzanowski",
+  "chrome_url_overrides": {
+     "newtab": "public/index.html"
+  },
+  "name": "Random Giphy",
+  "version": "0.1"
+}
