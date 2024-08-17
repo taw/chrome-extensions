@@ -1,0 +1,14 @@
+{
+  "name": "UK Property Search",
+  "description": "Improves RightMove and Zoopla experience",
+  "version": "1.0",
+  "author": "Tomasz Wegrzanowski",
+  "manifest_version": 3,
+  "content_scripts": [{
+    "matches": [
+      "https://www.rightmove.co.uk/*",
+      "https://www.zoopla.co.uk/*"
+    ],
+    "js": ["index.js"]
+  }]
+}
