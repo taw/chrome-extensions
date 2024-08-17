@@ -88,16 +88,19 @@ function findLatLonZoopla() {
 }
 
 function fixStupidUnits() {
-  let regex = /^(\d+\.\d+) miles$/;
   for(let el of [...document.querySelectorAll("span,div")]) {
-    let m = el.innerText.match(regex)
-    if (m) {
-      console.log("fixing m")
+    let m
+    if (m = el.innerText.match(/^(\d+\.\d+) miles$/)) {
       let miles = parseFloat(m)
       let km = 1.6 * miles
       let minutes = km * 12
-      // el.innerText = `${miles} miles / ${km.toFixed(1)} km / ${minutes.toFixed(0)} min`
       el.innerText = `${km.toFixed(1)} km / ${minutes.toFixed(0)} min`
+    }
+    if (m = el.innerText.match(/^([0-9,]+)\ sq\. ft$/)) {
+      let sqft = parseFloat(m[1].replace(/,/g, ''))
+      let sqm = sqft / 10.7639
+      el.innerText = `${sqm.toFixed(1)} m²`
+      console.log({sqft, sqm})
     }
   }
 }
