@@ -4,6 +4,8 @@ let currentPostcode = null
 let crystalRoofUrl = null
 let button1 = null
 let button2 = null
+let traveltime = null
+let traveltimediv = null
 
 function addCrystalRoofButton() {
   if (document.querySelector("#extension-buttons")) return
@@ -17,7 +19,7 @@ function addCrystalRoofButton() {
   document.body.appendChild(div)
 
   button1 = document.createElement('button')
-  button1.textContent = `Copy postcode ${currentPostcode}`
+  button1.textContent = `Copy postcode ${currentPostcode || 'unknown'}`
   button1.addEventListener('click', function() {
     navigator.clipboard.writeText(currentPostcode)
   })
@@ -34,14 +36,31 @@ function addCrystalRoofButton() {
     }
   })
 
+  traveltimediv = document.createElement('button')
+  traveltimediv.textContent = `Travel time: ${traveltime || 'unknown'}`
+
   // Add button to the page
   div.appendChild(button1)
   div.appendChild(button2)
+  div.appendChild(traveltimediv)
 }
 
 function getCrystalRoofUrl(postcode) {
   let postcode_nospace = postcode.replace(/\s/g, '')
   return `https://crystalroof.co.uk/report/postcode/${postcode_nospace}/overview`
+}
+
+function findTravelTime() {
+  let targetPostcode = "EC4V 3BJ"
+  let from_esc = encodeURIComponent(currentPostcode)
+  let to_esc = encodeURIComponent(targetPostcode)
+  let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${from_esc}/to/${to_esc}`
+  fetch(url)
+    .then(res => res.json())
+    .then(res => {
+      traveltime = Math.min(...res.journeys.map(j => j.duration))
+      traveltimediv.textContent = `Travel time: ${traveltime || 'unknown'}`
+    })
 }
 
 function setPostcode(postcode) {
@@ -51,6 +70,7 @@ function setPostcode(postcode) {
   if(button1) {
     button1.textContent = `Copy postcode ${currentPostcode}`
   }
+  findTravelTime()
 }
 
 function setLatLon(lat, lon) {
