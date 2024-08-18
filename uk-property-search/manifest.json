@@ -7,7 +7,8 @@
   "content_scripts": [{
     "matches": [
       "https://www.rightmove.co.uk/*",
-      "https://www.zoopla.co.uk/*"
+      "https://www.zoopla.co.uk/*",
+      "https://crystalroof.co.uk/*"
     ],
     "js": ["index.js"]
   }]

@@ -7,7 +7,7 @@ let button2 = null
 let traveltime = null
 let traveltimediv = null
 
-function addCrystalRoofButton() {
+function addButton() {
   if (document.querySelector("#extension-buttons")) return
 
   let div = document.createElement('div')
@@ -110,26 +110,36 @@ function findLatLonZoopla() {
 function fixStupidUnits() {
   for(let el of [...document.querySelectorAll("span,div")]) {
     let m
-    if (m = el.innerText.match(/^(\d+\.\d+) miles$/)) {
-      let miles = parseFloat(m)
+    if (m = el.innerText.match(/^(\d+\.\d+) miles(\s*)$/)) {
+      let miles = parseFloat(m[1])
       let km = 1.6 * miles
       let minutes = km * 12
-      el.innerText = `${km.toFixed(1)} km / ${minutes.toFixed(0)} min`
+      el.innerText = `${km.toFixed(1)} km / ${minutes.toFixed(0)} min` + m[2]
+    }
+    if (m = el.innerText.match(/^([0-9]+)\ yards(\s*)$/)) {
+      let yards = parseFloat(m[1])
+      let km = yards * 0.9144 / 1000
+      let minutes = km * 12
+      el.innerText = `${km.toFixed(2)} km / ${minutes.toFixed(0)} min` + m[2]
     }
     if (m = el.innerText.match(/^([0-9,]+)\ sq\. ft$/)) {
       let sqft = parseFloat(m[1].replace(/,/g, ''))
       let sqm = sqft / 10.7639
       el.innerText = `${sqm.toFixed(1)} m²`
-      console.log({sqft, sqm})
     }
   }
 }
 
 function applyImprovements() {
   fixStupidUnits()
-  findLatLonRightmove()
-  findLatLonZoopla()
-  addCrystalRoofButton()
+  if (window.location.hostname.endsWith("rightmove.co.uk")) {
+    findLatLonRightmove()
+    addButton()
+  }
+  if (window.location.hostname.endsWith("zoopla.co.uk")) {
+    findLatLonZoopla()
+    addButton()
+  }
 }
 
 setInterval(applyImprovements, 1000)
