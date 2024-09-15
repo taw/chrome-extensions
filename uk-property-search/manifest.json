@@ -8,7 +8,8 @@
     "matches": [
       "https://www.rightmove.co.uk/*",
       "https://www.zoopla.co.uk/*",
-      "https://crystalroof.co.uk/*"
+      "https://crystalroof.co.uk/*",
+      "https://jitty.com/*"
     ],
     "js": ["index.js"]
   }]

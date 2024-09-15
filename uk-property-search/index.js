@@ -16,6 +16,9 @@ function addButton() {
   div.style.top = '10px'
   div.style.left = '10px'
   div.style.zIndex = '9999'
+  div.style.backgroundColor = 'white'
+  div.style.borderColor = 'black'
+  div.style.borderWidth = '1px'
   document.body.appendChild(div)
 
   button1 = document.createElement('button')
@@ -28,6 +31,8 @@ function addButton() {
   button2 = document.createElement('button')
   button2.textContent = 'Open Crystal Roof Report'
   button2.id = "crystal-roof-button"
+  button2.style.marginLeft = '10px'
+  button2.style.marginRight = '10px'
 
   // Add click event listener
   button2.addEventListener('click', function() {
@@ -107,6 +112,16 @@ function findLatLonZoopla() {
   setLatLon(lat, lon)
 }
 
+function findLatLonJitty() {
+  let map = document.querySelector("[data-controller='map']")
+  if (!map) return
+  let lon = map.getAttribute("data-map-lon-value")
+  let lat = map.getAttribute("data-map-lat-value")
+  if (lon && lat) {
+    setLatLon(lat, lon)
+  }
+}
+
 function fixStupidUnits() {
   for(let el of [...document.querySelectorAll("span,div")]) {
     let m
@@ -138,6 +153,10 @@ function applyImprovements() {
   }
   if (window.location.hostname.endsWith("zoopla.co.uk")) {
     findLatLonZoopla()
+    addButton()
+  }
+  if (window.location.hostname.endsWith("jitty.com")) {
+    findLatLonJitty()
     addButton()
   }
 }
