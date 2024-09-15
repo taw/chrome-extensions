@@ -9,7 +9,8 @@
       "https://www.rightmove.co.uk/*",
       "https://www.zoopla.co.uk/*",
       "https://crystalroof.co.uk/*",
-      "https://jitty.com/*"
+      "https://jitty.com/*",
+      "https://www.onthemarket.com/*"
     ],
     "js": ["index.js"]
   }]

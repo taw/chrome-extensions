@@ -122,6 +122,19 @@ function findLatLonJitty() {
   }
 }
 
+function findLatLonOnTheMarket() {
+  let map = document.querySelector("[alt=map]")
+  console.log({map})
+  if (!map) return
+  let url = new URL(map.src)
+  let params = new URLSearchParams(url.search)
+  let center = params.get('center')
+  if (center) {
+    let [lat, lon] = center.split(",")
+    setLatLon(lat, lon)
+  }
+}
+
 function fixStupidUnits() {
   for(let el of [...document.querySelectorAll("span,div")]) {
     let m
@@ -157,6 +170,10 @@ function applyImprovements() {
   }
   if (window.location.hostname.endsWith("jitty.com")) {
     findLatLonJitty()
+    addButton()
+  }
+  if (window.location.host.endsWith("onthemarket.com")) {
+    findLatLonOnTheMarket()
     addButton()
   }
 }
