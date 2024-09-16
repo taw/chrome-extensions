@@ -107,9 +107,20 @@ function findLatLonRightmove() {
 
 function findLatLonZoopla() {
   let mapurlset = [...document.querySelectorAll("picture source")].map(i => i.srcset).find(u => u.startsWith("https://maps.zoopla.co.uk/styles/portal/static/"))
-  if(!mapurlset) return
-  let [lon, lat] = mapurlset.split("/")[6].split(",")
-  setLatLon(lat, lon)
+  if (mapurlset) {
+    let [lon, lat] = mapurlset.split("/")[6].split(",")
+    setLatLon(lat, lon)
+    return
+  }
+  let googleUrl = [...document.querySelectorAll("picture source")].map(i => i.srcset).find(u => u.startsWith("https://maps.googleapis.com/maps/api/staticmap"))
+  if (!googleUrl) return
+  let url = new URL(googleUrl)
+  let params = new URLSearchParams(url.search)
+  let center = params.get('center')
+  if (center) {
+    let [lat, lon] = center.split(",")
+    setLatLon(lat, lon)
+  }
 }
 
 function findLatLonJitty() {
