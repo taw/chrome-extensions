@@ -149,11 +149,11 @@ function findLatLonOnTheMarket() {
 function fixStupidUnits() {
   for(let el of [...document.querySelectorAll("span,div")]) {
     let m
-    if (m = el.innerText.match(/^(\d+\.\d+) miles(\s*)$/)) {
-      let miles = parseFloat(m[1])
+    if (m = el.innerText.match(/^(\s*)(\d+\.\d+) miles(\s*)$/)) {
+      let miles = parseFloat(m[2])
       let km = 1.6 * miles
       let minutes = km * 12
-      el.innerText = `${km.toFixed(1)} km / ${minutes.toFixed(0)} min` + m[2]
+      el.innerText = m[1] + `${km.toFixed(1)} km / ${minutes.toFixed(0)} min` + m[3]
     }
     if (m = el.innerText.match(/^([0-9]+)\ yards(\s*)$/)) {
       let yards = parseFloat(m[1])
